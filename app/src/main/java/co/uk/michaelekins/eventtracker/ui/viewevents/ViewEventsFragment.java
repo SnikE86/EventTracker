@@ -9,18 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
-import java.util.List;
 
 import co.uk.michaelekins.eventtracker.R;
-import co.uk.michaelekins.eventtracker.databases.AppDatabase;
 import co.uk.michaelekins.eventtracker.events.InstanceEvent;
-import co.uk.michaelekins.eventtracker.ui.home.HomeViewModel;
 
 public class ViewEventsFragment extends Fragment {
 
@@ -46,17 +40,11 @@ public class ViewEventsFragment extends Fragment {
         final Observer<InstanceEvent> loadedInstanceEventsObserver = new Observer<InstanceEvent>() {
             @Override
             public void onChanged(@Nullable final InstanceEvent newInstanceEvent) {
-//                InstanceEvent newInstanceEvent = newInstanceEvents.getValue();
                 textView.setText(newInstanceEvent.name);
             }
         };
 
         viewEventsViewModel.getLoadedInstances().observe(this, loadedInstanceEventsObserver);
-
-//        LiveData<InstanceEvent> newInstanceEvents = viewEventsViewModel.getLoadedInstances();
-//        InstanceEvent newInstanceEvent = newInstanceEvents.getValue();
-//        textView.setText(newInstanceEvent.name);
-
     }
 
 }

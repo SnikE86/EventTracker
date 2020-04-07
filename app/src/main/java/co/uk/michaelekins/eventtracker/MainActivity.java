@@ -21,14 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "events-database").allowMainThreadQueries().build();
-//        InstanceEvent newInstanceEvent = new InstanceEvent();
-//        newInstanceEvent.eventId = 0;
-//        newInstanceEvent.name = "test";
-//        db.instanceEventDao().insertAll(newInstanceEvent);
-
-//        Events events = new Events(db);
-
         MyApplication myApplication = new MyApplication( this);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -40,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-//        ViewEventsViewModel viewEventsViewModel = new ViewModelProvider(this).get(ViewEventsViewModel.class);
-//        viewEventsViewModel.seedDataSource(events);
-
     }
 
 }
