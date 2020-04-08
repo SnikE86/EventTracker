@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.List;
+
 import co.uk.michaelekins.eventtracker.R;
 import co.uk.michaelekins.eventtracker.events.InstanceEvent;
 import co.uk.michaelekins.eventtracker.repositories.EventsAdapter;
@@ -40,12 +42,14 @@ public class ViewEventsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new EventsAdapter();
 
-        final Observer<InstanceEvent> loadedInstanceEventsObserver = new Observer<InstanceEvent>() {
+        final Observer<List<InstanceEvent>> loadedInstanceEventsObserver = new Observer<List<InstanceEvent>>() {
             @Override
-            public void onChanged(@Nullable final InstanceEvent newInstanceEvent) {
-                Integer count = mAdapter.getItemCount();
-                mAdapter.addItem(newInstanceEvent);
-                mAdapter.notifyItemInserted(count + 1);
+            public void onChanged(@Nullable final List<InstanceEvent> newInstanceEvents) {
+
+                for (InstanceEvent newInstanceEvent : newInstanceEvents) {
+                    mAdapter.addItem(newInstanceEvent);
+                }
+                mAdapter.notifyItemInserted(newInstanceEvents.size());
             }
         };
 

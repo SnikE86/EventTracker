@@ -3,20 +3,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 
+import java.util.List;
+
 import co.uk.michaelekins.eventtracker.events.InstanceEvent;
 import co.uk.michaelekins.eventtracker.repositories.EventsLiveData;
 
 public class ViewEventsViewModel extends ViewModel {
 
     private EventsLiveData eventsLiveData;
-    public LiveData<InstanceEvent> loadedInstanceEvents;
+    public LiveData<List<InstanceEvent>> loadedInstanceEvents;
 
     public ViewEventsViewModel(){
         eventsLiveData = new EventsLiveData();
         loadedInstanceEvents = eventsLiveData.requestInstanceEvents();
     }
 
-    public LiveData<InstanceEvent> getLoadedInstances() {
+    public LiveData<List<InstanceEvent>> getLoadedInstances() {
         return loadedInstanceEvents;
     }
 }
