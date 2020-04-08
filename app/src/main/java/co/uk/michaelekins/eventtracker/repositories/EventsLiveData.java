@@ -9,7 +9,7 @@ import co.uk.michaelekins.eventtracker.events.InstanceEvent;
 public class EventsLiveData {
 
     public LiveData<InstanceEvent> requestInstanceEvents() {
-        MyApplication myApp = MyApplication.getInstance();
+        DatabaseRepository myApp = DatabaseRepository.getInstance();
 
         return myApp.db.instanceEventDao().getAll();
     }

@@ -4,47 +4,59 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import co.uk.michaelekins.eventtracker.R;
 import co.uk.michaelekins.eventtracker.events.InstanceEvent;
+import co.uk.michaelekins.eventtracker.repositories.EventsAdapter;
 
 public class ViewEventsFragment extends Fragment {
 
     private ViewEventsViewModel viewEventsViewModel;
 
-    private TextView textView;
+    private RecyclerView recyclerView;
+    private EventsAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        textView = root.findViewById(R.id.text_home);
-
-        textView.setText("initial");
-        return root;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        View root = inflater.inflate(R.layout.fragment_view_events, container, false);
 
         viewEventsViewModel = new ViewModelProvider(this).get(ViewEventsViewModel.class);
+
+        layoutManager = new LinearLayoutManager(this.getContext());
+
+        recyclerView = root.findViewById(R.id.event_viewer_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new EventsAdapter();
+//        recyclerView.setAdapter(mAdapter);
 
         final Observer<InstanceEvent> loadedInstanceEventsObserver = new Observer<InstanceEvent>() {
             @Override
             public void onChanged(@Nullable final InstanceEvent newInstanceEvent) {
-                textView.setText(newInstanceEvent.name);
+                Integer count = mAdapter.getItemCount();
+                mAdapter.addItem(newInstanceEvent);
+                mAdapter.notifyItemInserted(count + 1);
             }
         };
 
         viewEventsViewModel.getLoadedInstances().observe(this, loadedInstanceEventsObserver);
-    }
 
+        recyclerView.setAdapter(mAdapter);
+
+        return root;
+    }
 }

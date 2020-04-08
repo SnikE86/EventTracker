@@ -4,4 +4,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_view_events">View Events</string>
     <string name="title_add_events">Add Events</string>
+
+    <string name="event_summary_name">Name:</string>
+    <string name="event_summary_date">Date:</string>
+    <string name="event_summary_tags">Tags:</string>
 </resources>

@@ -9,8 +9,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
-import co.uk.michaelekins.eventtracker.repositories.MyApplication;
+import co.uk.michaelekins.eventtracker.databases.AppDatabase;
+import co.uk.michaelekins.eventtracker.repositories.DatabaseRepository;
 
 //import co.uk.michaelekins.eventtracker.repositories.Events;
 
@@ -21,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyApplication myApplication = new MyApplication( this);
+        AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "events-database").allowMainThreadQueries().build();
+        DatabaseRepository databaseRepository = new DatabaseRepository( db);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
