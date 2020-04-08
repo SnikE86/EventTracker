@@ -14,8 +14,6 @@ import androidx.room.Room;
 import co.uk.michaelekins.eventtracker.databases.AppDatabase;
 import co.uk.michaelekins.eventtracker.repositories.DatabaseRepository;
 
-//import co.uk.michaelekins.eventtracker.repositories.Events;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
